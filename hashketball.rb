@@ -68,7 +68,7 @@ def num_points_scored(player_name)
           #binding.pry
           if player == player_name
             #binding.pry
-           return game_hash[location][attribute][player][:points].to_i
+           return stats[:points].to_i
           end
         end
       end
@@ -93,7 +93,7 @@ def shoe_size(player_name)
         data.collect do |player, stats|
           if player == player_name
           #binding.pry
-          return game_hash[location][attribute][player][:shoe].to_i
+          return stats[:shoe].to_i
           end
         end
       end
@@ -153,7 +153,7 @@ def player_numbers(team_name)
           team_data.collect do |attribute, data|
             if attribute == :players
               data.collect do |player, stats|
-                arr.push(game_hash[location][attribute][player][:number].to_i)
+                arr.push(stats[:number].to_i)
               end
             end
           end
@@ -175,12 +175,14 @@ def player_stats(player_name)
   end
   player_name = array.join(" ")
   
+  #iterate through game_hash
+  
   game_hash.collect do |location, team_data|
     team_data.collect do |attribute, data|
       if attribute == :players
         data.collect do |player, stats|
           if player == player_name
-            hash = stats
+            hash = stats    #create new hash to convert string to interger
             hash.collect do |key, value|
               hash[key] = value.to_i
             end
@@ -204,7 +206,7 @@ def big_shoe_rebounds
              # binding.pry
               if value.to_i > biggest
                 biggest = value.to_i
-                rebounds = game_hash[location][attribute][player][:rebounds].to_i
+                rebounds = stats[:rebounds].to_i
                # binding.pry
               end
             end
